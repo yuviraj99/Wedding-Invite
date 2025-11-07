@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Wedding Invitation - Join us for our special celebration"/>
+    <title>Yuvraj & Sadhna — Wedding Invitation (22–24 Nov 2025)</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root{
+            --gold:#D4AF37;
+            --dark-gold:#B8941F;
+            --cream:#FFF8F0;
+            --ivory:#FFFFF0;
+            --text-dark:#2C2C2C;
+            --text-light:#666;
+            --shadow: rgba(0,0,0,0.12);
+        }
+        *{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth}
+        body{
+            font-family:'Montserrat',sans-serif;
+            color:var(--text-dark);
+            background:linear-gradient(180deg,#fffdfa 0%, #fff8f0 100%);
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            line-height:1.6;
+        }
+
+        /* HERO */
+        .hero{
+            height:100vh;
+            position:relative;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            overflow:hidden;
+        }
+
+        .hero-video{
+            position:absolute;
+            top:50%;
+            left:50%;
+            min-width:100%;
+            min-height:100%;
+            width:auto;
+            height:auto;
+            transform:translate(-50%,-50%);
+            z-index:1;
+            object-fit:cover;
+            filter: saturate(1.05) contrast(1.02);
+            transition: filter .4s ease;
+        }
+
+        /* subtle dark vignette so text pops */
+        .hero-overlay{
+            position:absolute;
+            inset:0;
+            z-index:2;
+            background:linear-gradient(180deg, rgba(0,0,0,0.35) 10%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.45) 100%);
+            pointer-events:none;
+        }
+
+        .hero-content{
+            position:relative;
+            z-index:3;
+            text-align:center;
+            color:#fff;
+            padding:20px;
+            max-width:1100px;
+            width:100%;
+            animation:fadeInUp .9s ease both;
+        }
+
+        @keyframes fadeInUp{
+            from{opacity:0; transform: translateY(30px)}
+            to{opacity:1; transform: translateY(0)}
+        }
+
+        .names{
+            font-family:'Playfair Display', serif;
+            font-weight:700;
+            font-size: clamp(2.2rem, 6vw, 4.2rem);
+            letter-spacing:2px;
+            margin-bottom:0.4rem;
+        }
+
+        .subtext{
+            font-size: clamp(0.85rem, 2vw, 1.1rem);
+            letter-spacing: 2px;
+            text-transform:uppercase;
+            margin-bottom:1rem;
+            color: rgba(255,255,255,0.92);
+            font-weight:500;
+        }
+
+        .date-pill{
+            display:inline-block;
+            background: linear-gradient(90deg,var(--gold),var(--dark-gold));
+            color: #111;
+            padding:12px 22px;
+            border-radius:30px;
+            font-weight:600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+            margin-top:8px;
+        }
+
+        /* controls overlay (unmute / play) */
+        .video-controls {
+            position: absolute;
+            z-index: 6;
+            right: 28px;
+            bottom: 28px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            pointer-events: auto;
+        }
+
+        .vc-btn {
+            background: rgba(0,0,0,0.45);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: white;
+            padding: 10px 14px;
+            border-radius: 999px;
+            font-weight:600;
+            display:inline-flex;
+            align-items:center;
+            gap:10px;
+            cursor:pointer;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+            transition: transform .12s ease, background .12s ease;
+        }
+
+        .vc-btn:hover{ transform: translateY(-3px) }
+
+        .vc-btn svg{ width:18px; height:18px; display:block; }
+
+        /* scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index:5;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            pointer-events:none;
+            opacity:0;
+            transition:opacity .35s ease;
+        }
+        .scroll-indicator.visible { opacity: 1; pointer-events:auto }
+        .scroll-indicator span{ display:block; width:32px; height:56px; border-radius:20px; border:2px solid rgba(255,255,255,0.9); position:relative }
+        .scroll-indicator span::before{
+            content:''; position:absolute; left:50%; top:12px; transform:translateX(-50%); width:6px; height:6px; background:white; border-radius:50%; animation:scroll-down 2s infinite;
+        }
+        @keyframes scroll-down{ 0%{opacity:1; transform:translateY(0)} 100%{opacity:0; transform:translateY(16px)} }
+
+        /* events & layout */
+        .container{ max-width:1200px; margin:0 auto; padding:0 20px }
+        .section-title{ font-family:'Playfair Display', serif; font-size:clamp(1.6rem,4vw,2.6rem); text-align:center; color:var(--text-dark); margin: 48px 0 8px; }
+        .section-subtitle{ text-align:center; color:var(--text-light); margin-bottom: 36px }
+        .event-section{ padding:80px 0; background:var(--cream) }
+        .event-section:nth-child(odd){ background:var(--ivory) }
+        .event-container{ max-width:1400px; margin:0 auto; padding:0 24px }
+        .event-content{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center }
+        .event-image-wrapper{ width:100%; height:520px; border-radius:18px; overflow:hidden; box-shadow: 0 18px 60px var(--shadow); transition: transform .6s cubic-bezier(.2,1,.2,1), opacity .6s ease; transform:translateY(40px); opacity:0 }
+        .event-section.animate .event-image-wrapper{ transform:none; opacity:1 }
+        .event-image{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, rgba(212,175,55,0.08), rgba(212,175,55,0.14)) }
+        .event-image img{ width:100%; height:100%; object-fit:cover; display:block }
+        .event-info{ padding:28px; opacity:0; transform:translateY(20px); transition:all .6s cubic-bezier(.2,1,.2,1) .15s }
+        .event-section.animate .event-info{ opacity:1; transform:none }
+        .event-name{ font-family:'Playfair Display', serif; font-size:clamp(1.4rem,3vw,2rem); margin-bottom:8px }
+        .event-date{ color:var(--gold); font-weight:600; margin-bottom:8px }
+        .event-time{ color:var(--text-light); margin-bottom:6px }
+        .event-location{ font-weight:600; margin-bottom:6px }
+        .event-address{ color:var(--text-light); margin-bottom:10px }
+
+        /* footer */
+        .footer{ background:var(--text-dark); color:#fff; padding:48px 0 28px; text-align:center }
+        .footer h3{ font-family:'Playfair Display', serif; color:var(--gold); margin-bottom:12px }
+        .footer-copyright{ color:#cfcfcf; margin-top:12px }
+
+        /* responsive */
+        @media (max-width: 1024px){
+            .event-image-wrapper{ height:420px }
+            .hero-video{ filter: saturate(1) contrast(1) }
+        }
+        @media (max-width:768px){
+            .event-content{ grid-template-columns:1fr; gap:28px }
+            .event-image-wrapper{ height:360px }
+            .video-controls{ right:14px; bottom:14px }
+            .names{ font-size: clamp(1.6rem,7vw,3rem) }
+            .scroll-indicator{ bottom:14px }
+        }
+        @media (max-width:480px){
+            .event-image-wrapper{ height:280px }
+            .hero-content{ padding:12px }
+            .video-controls{ right:10px; bottom:10px; gap:8px }
+            .vc-btn{ padding:8px 10px }
+        }
+
+        /* small accessible focus states */
+        .vc-btn:focus{ outline:3px solid rgba(212,175,55,0.28); outline-offset:3px }
+    </style>
+</head>
+<body>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <!-- IMPORTANT: removed "muted" attribute so we try to play with sound.
+             Note: many browsers will still block autoplay with sound — handled in JS below. -->
+        <video id="heroVideo" class="hero-video" autoplay loop playsinline preload="auto" webkit-playsinline>
+            <!-- Fix: ensure filename is exact on your server; adjust path/name if necessary -->
+            <source src="30 sep yuvraj (rishikesh teaser.mp4" type="video/mp4">
+            <!-- Optional fallback poster -->
+            Your browser does not support the video tag.
+        </video>
+
+        <div class="hero-overlay" aria-hidden="true"></div>
+
+        <!-- content over video -->
+        <div class="hero-content container" aria-live="polite">
+            <div class="subtext">You're invited</div>
+            <div class="names">Yuvraj <span style="display:inline-block;margin:0 12px;color:var(--gold)">❤</span> Sadhna</div>
+            <div class="date-pill">22 — 24 November 2025</div>
+
+            <div style="margin-top:18px; color:rgba(255,255,255,0.95); font-weight:500;">
+                Shree Ram Farm House • Wedding on 24 Nov • Lagan Sagai 22 Nov • Haldi/Mehndi 23 Nov
+            </div>
+        </div>
+
+        <!-- Unmute / Play & Pause controls -->
+        <div class="video-controls" id="videoControls" aria-hidden="false">
+            <button class="vc-btn" id="muteBtn" type="button" aria-pressed="false" aria-label="Unmute video">
+                <!-- speaker icon (muted/unmuted toggled in JS) -->
+                <svg id="muteIcon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M5 9v6h4l5 4V5L9 9H5z" fill="currentColor"/>
+                </svg>
+                <span id="muteLabel">Unmute</span>
+            </button>
+
+            <button class="vc-btn" id="playBtn" type="button" aria-pressed="false" aria-label="Pause video">
+                <svg id="playIcon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M6 4.5v15l12-7.5L6 4.5z" fill="currentColor"/>
+                </svg>
+                <span id="playLabel">Pause</span>
+            </button>
+        </div>
+
+        <!-- scroll indicator -->
+        <div class="scroll-indicator" id="scrollIndicator" role="button" tabindex="0" aria-label="Scroll to events">
+            <span></span>
+        </div>
+    </section>
+
+    <!-- EVENTS -->
+    <section class="event-section" data-event="1">
+        <div class="event-container">
+            <div class="event-content image-right">
+                <div class="event-image-wrapper">
+                    <div class="event-image">
+                        <img src="lagan.jpg" alt="Lagan Sagai" />
+                    </div>
+                </div>
+                <div class="event-info">
+                    <h3 class="event-name">Lagan Sagai</h3>
+                    <p class="event-date">22 November 2025</p>
+                    <p class="event-time">7:00 PM</p>
+                    <p class="event-location">Shree Krishna Marriage Garden</p>
+                    <p class="event-address">Tonk Road, Sector 3, Pratap Nagar, Jaipur</p>
+                    <p class="event-description">Engagement ceremony and traditional rituals</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="event-section" data-event="2">
+        <div class="event-container">
+            <div class="event-content image-left">
+                <div class="event-image-wrapper">
+                    <div class="event-image">
+                        <img src="haldi.jpg" alt="Haldi Mehandi Sangeet" />
+                    </div>
+                </div>
+                <div class="event-info">
+                    <h3 class="event-name">Haldi • Mehandi • Sangeet</h3>
+                    <p class="event-date">23 November 2025</p>
+                    <p class="event-time">6:00 PM</p>
+                    <p class="event-location">Our Home</p>
+                    <p class="event-address">Jaipur</p>
+                    <p class="event-description">A joyful evening of music, dance and traditions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="event-section" data-event="3">
+        <div class="event-container">
+            <div class="event-content image-right">
+                <div class="event-image-wrapper">
+                    <div class="event-image">
+                        <img src="wedding.jpg" alt="Wedding ceremony" />
+                    </div>
+                </div>
+                <div class="event-info">
+                    <h3 class="event-name">Wedding</h3>
+                    <p class="event-date">24 November 2025</p>
+                    <p class="event-time">7:00 PM</p>
+                    <p class="event-location">Shree Ram Farm House</p>
+                    <p class="event-address">Bharatpur</p>
+                    <p class="event-description">Main wedding ceremony and grand reception celebration</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        (function(){
+            const heroVideo = document.getElementById('heroVideo');
+            const scrollIndicator = document.getElementById('scrollIndicator');
+            const muteBtn = document.getElementById('muteBtn');
+            const muteIcon = document.getElementById('muteIcon');
+            const muteLabel = document.getElementById('muteLabel');
+            const playBtn = document.getElementById('playBtn');
+            const playIcon = document.getElementById('playIcon');
+            const playLabel = document.getElementById('playLabel');
+            let firstLoopComplete = false;
+            let hasScrolled = false;
+
+            // Set initial preferences: try to play with sound
+            heroVideo.muted = false;
+            heroVideo.volume = 0.8; // reasonable default
+
+            // Attempt to play with sound when video canplay
+            heroVideo.addEventListener('canplay', async () => {
+                try {
+                    await heroVideo.play();
+                    // autoplay with sound succeeded — hide unmute hint
+                    updateMuteUI(false);
+                } catch (err) {
+                    // Browser blocked autoplay with sound -> fallback to muted autoplay and show unmute control
+                    try {
+                        heroVideo.muted = true;
+                        await heroVideo.play();
+                    } catch (e) {
+                        // if even muted autoplay fails, do nothing — user will press play
+                    }
+                    updateMuteUI(true); // show unmute
+                }
+            });
+
+            // If user interacts (touch/click) enable sound and resume
+            function userEnableSound() {
+                heroVideo.muted = false;
+                heroVideo.volume = 0.8;
+                heroVideo.play().catch(()=>{/*ignore*/});
+                updateMuteUI(false);
+            }
+
+            window.addEventListener('touchstart', function onFirstTouch() {
+                // On mobile, browsers require a gesture — unmute if user touches the page (helpful)
+                if (heroVideo.muted) {
+                    // keep the decision controlled by user via button — do not auto-unmute on arbitrary touches
+                }
+                window.removeEventListener('touchstart', onFirstTouch);
+            }, { once: true });
+
+            // Mute / Unmute button click
+            muteBtn.addEventListener('click', () => {
+                if (heroVideo.muted) {
+                    heroVideo.muted = false;
+                    heroVideo.volume = 0.8;
+                    heroVideo.play().catch(()=>{/*ignore*/});
+                    updateMuteUI(false);
+                } else {
+                    heroVideo.muted = true;
+                    updateMuteUI(true);
+                }
+            });
+
+            // Play / Pause button
+            playBtn.addEventListener('click', async () => {
+                if (heroVideo.paused) {
+                    try {
+                        await heroVideo.play();
+                        playLabel.textContent = 'Pause';
+                        playBtn.setAttribute('aria-pressed','true');
+                    } catch (e) {
+                        // If play fails, show unmute suggestion
+                        updateMuteUI(true);
+                    }
+                } else {
+                    heroVideo.pause();
+                    playLabel.textContent = 'Play';
+                    playBtn.setAttribute('aria-pressed','false');
+                }
+            });
+
+            // keep UI in sync
+            heroVideo.addEventListener('play', () => {
+                playLabel.textContent = 'Pause';
+                playBtn.setAttribute('aria-pressed','true');
+            });
+            heroVideo.addEventListener('pause', () => {
+                playLabel.textContent = 'Play';
+                playBtn.setAttribute('aria-pressed','false');
+            });
+
+            function updateMuteUI(isMuted){
+                if(isMuted){
+                    // show "Unmute" label
+                    muteLabel.textContent = 'Unmute';
+                    muteBtn.setAttribute('aria-pressed','true');
+                    // change icon to muted symbol (simple cross)
+                    muteIcon.innerHTML = '<path d="M5 9v6h4l5 4V5L9 9H5z" fill="currentColor"/><path d="M18 6l-1.4 1.4L20.2 11H18v2h3.2l-3.6 3.6L18 18l5-6-5-6z" fill="currentColor" opacity="0.0"/>';
+                } else {
+                    muteLabel.textContent = 'Mute';
+                    muteBtn.setAttribute('aria-pressed','false');
+                    // speaker icon
+                    muteIcon.innerHTML = '<path d="M5 9v6h4l5 4V5L9 9H5z" fill="currentColor"/>';
+                }
+            }
+
+            // Show scroll indicator only after video has played a bit or after 4 seconds
+            heroVideo.addEventListener('timeupdate', function(){
+                if (!firstLoopComplete && heroVideo.duration && heroVideo.currentTime > 0) {
+                    const duration = heroVideo.duration || 0;
+                    if (heroVideo.currentTime >= Math.min(duration * 0.95, 4)) {
+                        firstLoopComplete = true;
+                        scrollIndicator.classList.add('visible');
+                    }
+                }
+            });
+
+            // Fallback: if video duration isn't available, show indicator after 4s
+            setTimeout(() => {
+                if (!firstLoopComplete) {
+                    scrollIndicator.classList.add('visible');
+                }
+            }, 4200);
+
+            // Scroll indicator click
+            function scrollToEvents(){
+                const nextSection = document.querySelector('.event-section');
+                if(nextSection){
+                    nextSection.scrollIntoView({ behavior:'smooth', block:'start' });
+                    scrollIndicator.classList.remove('visible');
+                    hasScrolled = true;
+                }
+            }
+            scrollIndicator.addEventListener('click', scrollToEvents);
+            scrollIndicator.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); scrollToEvents(); }
+            });
+
+            // Hide indicator after user scrolls
+            window.addEventListener('scroll', () => {
+                if (!hasScrolled && window.scrollY > 30) {
+                    hasScrolled = true;
+                    scrollIndicator.classList.remove('visible');
+                }
+            }, { passive: true });
+
+            // IntersectionObserver for event animations
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting){
+                        entry.target.classList.add('animate');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.18, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('.event-section').forEach(s => observer.observe(s));
+
+            // Accessibility helpers: keyboard to unmute via U, space to play/pause for focus
+            document.addEventListener('keydown', (e) => {
+                // U to toggle mute/unmute
+                if (e.key.toLowerCase() === 'u') {
+                    muteBtn.click();
+                }
+                // Space or K to toggle play/pause
+                if (e.key === ' ' || e.key.toLowerCase() === 'k') {
+                    if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) {
+                        return; // don't intercept while typing
+                    }
+                    e.preventDefault();
+                    playBtn.click();
+                }
+            });
+
+            // Expose a method to enable sound on explicit user gesture - helpful if you want a separate CTA
+            window.enableWeddingSound = userEnableSound;
+
+            // Initial UI state
+            // If video is muted (because browser blocked), show 'Unmute' label; otherwise show 'Mute'
+            setTimeout(() => {
+                updateMuteUI(!!heroVideo.muted);
+            }, 600);
+
+        })();
+    </script>
+</body>
+</html>
